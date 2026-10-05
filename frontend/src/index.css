@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: 'Nunito', sans-serif;
+  --color-forest: #1a473b;
+  --color-sand: #f4c782;
+  --color-mint: #c5e1d4;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  /* Fix for light mode autofill */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  select:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
+    -webkit-text-fill-color: #0f172a !important;
+    caret-color: #0f172a !important;
+    transition: background-color 5000s ease-in-out 0s;
+    border-radius: inherit;
+  }
+
+  /* Fix for dark mode autofill */
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover, 
+  .dark input:-webkit-autofill:focus, 
+  .dark input:-webkit-autofill:active,
+  .dark textarea:-webkit-autofill,
+  .dark textarea:-webkit-autofill:hover,
+  .dark textarea:-webkit-autofill:focus,
+  .dark textarea:-webkit-autofill:active,
+  .dark select:-webkit-autofill,
+  .dark select:-webkit-autofill:hover,
+  .dark select:-webkit-autofill:focus,
+  .dark select:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #0f172a inset !important;
+    -webkit-text-fill-color: #f8fafc !important;
+    caret-color: #f8fafc !important;
+    transition: background-color 5000s ease-in-out 0s;
+    border-radius: inherit;
+  }
+
+  /* Transparent input autofill override to preserve rounded container backgrounds */
+  input.bg-transparent:-webkit-autofill,
+  input.bg-transparent:-webkit-autofill:hover,
+  input.bg-transparent:-webkit-autofill:focus,
+  input.bg-transparent:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: #0f172a !important;
+  }
+
+  .dark input.bg-transparent:-webkit-autofill,
+  .dark input.bg-transparent:-webkit-autofill:hover,
+  .dark input.bg-transparent:-webkit-autofill:focus,
+  .dark input.bg-transparent:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: #f8fafc !important;
+  }
+}
+
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(244, 199, 130, 0.2);
+    border-radius: 20px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(244, 199, 130, 0.4);
+  }
+}
+
+/* Enterprise Action Feedback Animations */
+@keyframes actionRowAdded {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes actionRowUpdated {
+  0% {
+    background-color: rgba(234, 76, 137, 0.18);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes actionRowDeleting {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    max-height: 120px;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+    max-height: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    overflow: hidden;
+  }
+}
+
+@keyframes actionShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-action-added {
+  animation: actionRowAdded 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-action-updated {
+  animation: actionRowUpdated 0.6s ease-out forwards;
+}
+
+.animate-action-deleting {
+  animation: actionRowDeleting 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-action-shake {
+  animation: actionShake 0.35s ease-in-out forwards;
+}
+
